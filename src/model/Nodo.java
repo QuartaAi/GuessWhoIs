@@ -1,48 +1,62 @@
 /*
- * Nodo: ADT che implementa Nodi di alberi BINARI.
+ * Nodo: ADT che implementa Nodi per valori generics di alberi BINARI.
  */
 package model;
 
 
-public class Nodo {
-    
-    private String info;
-    private Nodo dx=null, sx=null;
+public class Nodo<T> {
 
-    public int getNumChildren() {
-        int num_children = 0;
-        if (dx!=null) num_children++;
-        if (sx!=null) num_children++;
-        return num_children;
-    }
-    
-    public Nodo(String info) {
-        this.info = info;
-    }
+  private T value;
+  private Nodo<T> parent, sx, dx;
 
-    public String getInfo() {
-        return info;
-    }
+  public Nodo(T value) {
+      this.value = value;
+      parent = sx = dx = null;
+  }
+  
+  public Nodo(T value, Nodo parent) {
+      this.value = value;
+      this.parent = parent;
+      sx = dx = null;
+  }
+  
+  public Nodo(T value, Nodo parent, Nodo sx, Nodo dx) {
+      this.value = value;
+      this.parent = parent;
+      this.sx = sx;
+      this.dx = dx;
+  }
 
-    public Nodo getDx() {
-        return dx;
-    }
+  public T getValue() {
+    return value;
+  }
 
-    public Nodo getSx() {
-        return sx;
-    }
+  public Nodo<T> getDx() {
+    return dx;
+  }
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+  public Nodo<T> getSx() {
+    return sx;
+  }
 
-    public void setDx(Nodo dx) {
-        this.dx = dx;
-    }
+  public Nodo<T> getParent() {
+    return parent;
+  }
 
-    public void setSx(Nodo sx) {
-        this.sx = sx;
-    }
+  public void setValue(T value) {
+    this.value = value;
+  }
 
-    
+  public void setDx(Nodo<T> dx) {
+    this.dx = dx;
+  }
+
+  public void setSx(Nodo<T> sx) {
+    this.sx = sx;
+  }
+
+  public void setParent(Nodo<T> parent) {
+    this.parent = parent;
+  }
+
 }
