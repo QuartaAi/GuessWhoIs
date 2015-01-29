@@ -15,43 +15,43 @@ public class GuessWhoIs {
   /**
    * @param args the command line arguments
    */
-  public static void main(String[] args) {
-    
-    Nodo<String> p = new Nodo<>("il cane");
-    Scanner lettore = new Scanner(System.in);
+    public static void main(String[] args) {
 
-    while (true) {
-      while (p.getSx()!=null) {
-        System.out.println(p.getValue() + "? ");
-        String answer = lettore.nextLine();
-        if (answer!=null && answer.equalsIgnoreCase("si")) {
-          p = p.getSx();
-        } else p = p.getDx();
-      }
-      System.out.println("E' " + p.getValue() + "\nHo indovinato? ");
-      String answer = lettore.nextLine();
-      if (answer!=null && answer.equalsIgnoreCase("si")) {
-        System.out.println("Troppo forte!!!");
-        break;
-      }
-      System.out.println("OK!\nScusa, cos'era? ");
-      answer = lettore.nextLine();
-      System.out.println("E che differenza c'è tra " + answer + " e " + p.getValue() + "?");
-      String differenza = lettore.nextLine();
-      impara(p, differenza, answer);
-      while (p.getParent()!=null) p = p.getParent();
-      System.out.println("Ok. Grazie.\nRiproviamo.");
+        String answer, differenza, giusto, sbagliato;
+        Scanner lettore = new Scanner(System.in);
+        Albero<String> t = new Albero<>();
+        Nodo<String> tmp;
+        t.makeSx("il cane");
+      
+
+        while (true) {
+            System.out.println("\nPensa un animale ...");
+            while ( ! t.isLeaf() ) {
+                System.out.print(t.getCurrentValue() + "? ");
+                answer = lettore.nextLine();
+                if (answer!=null && answer.equalsIgnoreCase("si")) t.goSx(); else t.goDx();
+            }
+            System.out.print("Ci sono! E' " + t.getCurrentValue() + "! Ho indovinato? ");
+            answer = lettore.nextLine();
+            if (answer!=null && answer.equalsIgnoreCase("si")) {
+                System.out.println("EVVIVA! Sono troppo forte!!!");
+                break;
+            }
+            System.out.print("NON HO INDOVINATO?\nE va bene, pazienza! Scusa, ma cos'era? ");
+            giusto = lettore.nextLine();
+            sbagliato = t.getCurrentValue();
+            System.out.print("E che differenza c'è tra " + giusto + " e " + sbagliato + "? ");
+            differenza = lettore.nextLine();
+            // sostituisce al nodo sbagliato un sottoalbero fatto da [giusto/differenza\sbagliato]
+            tmp = t.getCurrent();
+            tmp.setValue(differenza);
+            tmp.setSx(new Nodo<String>(giusto,tmp));
+            tmp.setDx(new Nodo<String>(sbagliato,tmp));
+            t.goHome();
+        System.out.println( t.toString() );
+            System.out.println("Ok. Grazie.\n\nRiproviamo?");
+        }
+        System.out.println( t.toString() );
     }
-    
-  }
 
-  public static Nodo impara(Nodo vecchio, String differenza, String nuovo) {
-    Nodo<String> diff = new Nodo<>(differenza);
-    diff.setParent(vecchio.getParent());
-    vecchio.setParent(diff);
-    diff.setSx(new Nodo<>(nuovo, diff));
-    diff.setDx(vecchio);
-    return diff;
-  }
-  
 }
