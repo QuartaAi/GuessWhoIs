@@ -12,8 +12,13 @@ public class Albero<T> {
     
     private Nodo<T> current;
 
-    public Albero() {
-        current= null;
+    public void writeToXMLFile(String filename) {
+        // da implementare
+    }
+    
+    public Albero(T t) {
+        Nodo<T> tmp = new Nodo<>(t);
+        current= tmp;
     }
 
     public Nodo<T> getRoot() {
