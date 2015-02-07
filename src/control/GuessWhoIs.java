@@ -16,14 +16,15 @@ public class GuessWhoIs {
    */
     public static void main(String[] args) {
 
-        Albero<String> t = new Albero<>("il gatto");
-        t.makeSx("il cane");
-        t.makeDx("la mucca");
-        t.goDx();
-        t.makeSx("il capriolo");
-        t.makeDx("la pecora");
-        System.out.println(t.toString());
+        BinaryTree<String> tree = new BinaryTree<>();
+        tree.readFromFile("data/tree.txt");
         
+        while ( Play.guess(tree) );
+        System.out.println(tree.toString());
+        System.out.println(tree.getRoot().toXML(""));
+        
+        tree.writeToFile("data/tree.txt");
+        tree.writeToXmlFile("data/tree.xml");
         
     }
     

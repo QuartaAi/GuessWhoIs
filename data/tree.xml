@@ -1,0 +1,4 @@
+<node id="1" type="root" value="miagola">
+  <node id="2" type="sx" value="il gatto"/>
+  <node id="3" type="dx" value="il cane"/>
+</node>
