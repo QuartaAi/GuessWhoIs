@@ -4,9 +4,9 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Guess Who Is
+* Version TUI
+* [Sandro Gallo](https://github.com/QuartaAi/GuessWhoIs)
 
 ### How do I get set up? ###
 
